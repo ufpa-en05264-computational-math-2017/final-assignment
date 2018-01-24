@@ -4,7 +4,7 @@ def main():
   algorithms = ["LU", "Gauss", "Jacobi", "Seidel", "Simplex"]
   print(
     "\n".join(
-      "Digit %i for %s" % (i, algo)
+      "Digit %i for %s" % (i + 1, algo)
         for i, algo in enumerate(algorithms)
     )
   )
@@ -14,7 +14,7 @@ def main():
   if algorithm_id < 1 or algorithm_id > len(algorithms):
     fail("Invalid option")
 
-  algorithm = algorithms[algorithm_id]
+  algorithm = algorithms[algorithm_id - 1]
 
   update_line("Algoritm: " + blue(algorithm))
   print()
