@@ -2,34 +2,22 @@ from functools import reduce
 import operator
 
 def maximization(n, objective, restrictions):
-  print(n)
-  print(objective)
-  print(restrictions)
-
   if n > 3:
     print("Error: Won't handle more than 3 variables")
     raise
 
   objective_restriction = transform_objective_fn_to_restriction(objective)
   table = start_table(n, restrictions + [objective_restriction])
+  yield table
 
   while have_negatives(table[-1]):
-    print_table(n, table)
-
     pivot_col = find_pivot_col(table)
     pivot_row = find_pivot_row(pivot_col, table)
-    print("pivot col", pivot_col)
-    print("pivot row", pivot_row)
     new_pivot_row = list(generate_new_pivot_row(pivot_row, pivot_col, table))
     table[pivot_row] = new_pivot_row
-    print("new pivot row", new_pivot_row)
-    # print_table(n, table)
 
     table = update_table_for_new_pivot_row(pivot_row, pivot_col, table)
-
-    print_table(n, table)
-
-  return 10
+    yield table
 
 def start_table(n, restrictions):
   table = []
@@ -73,24 +61,6 @@ def restriction_to_equation(restriction):
 def transform_objective_fn_to_restriction(objective):
   negatives = list([-x for x in objective])
   return negatives + [0, "objective"]
-
-def print_table(n, table):
-  formated_table = list(map(lambda row:
-    list(
-      map(lambda x: "{0:.2f}".format(round(x,2)), row)
-    )
-  , table))
-
-  SUB = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"]
-  slack_count = len(table[0]) - n - 1
-
-  head = [("x%s" % SUB[i]) for i in range(1, n + 1)] + [("xF%s" % SUB[i]) for i in range(1, slack_count)] + ["Z", "b"]
-
-  s = [[str(e) for e in row] for row in [head] + formated_table]
-  lens = [max(map(len, col)) for col in zip(*s)]
-  fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
-  table = [fmt.format(*row) for row in s]
-  print('\n'.join(table))
 
 def find_pivot_col(table):
   def lowest(a, b): return a if a[1] < b[1] else b
