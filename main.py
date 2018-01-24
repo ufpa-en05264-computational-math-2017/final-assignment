@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import sys
 from utils import nth_x, equation
 from simplex import maximization
