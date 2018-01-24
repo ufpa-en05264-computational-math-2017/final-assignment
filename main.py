@@ -20,7 +20,7 @@ def main():
   algorithm = algorithms[algorithm_id - 1]
 
   update_line("Algoritm: " + blue(algorithm))
-  print()
+  empty_line()
 
   options = { 1: lu_handler,
               2: gauss_handler,
@@ -53,7 +53,7 @@ def simplex_handler():
   n_restrictions = ask_number(prompt)
   update_line(prompt + blue(str(n_restrictions)))
 
-  print()
+  empty_line()
 
   objective = []
 
@@ -101,15 +101,15 @@ def simplex_handler():
 
   problem = [n_vars, objective, restrictions]
 
-  print()
+  empty_line()
 
   gen = maximization(*problem)
 
   for table in gen:
     printer.print_simplex_table(3, table)
-    print()
+    empty_line()
 
-  print()
+  empty_line()
 
 END_COLOR = '\033[0m'
 CURSOR_UP_ONE = '\x1b[1A'
@@ -138,6 +138,9 @@ def ask_number(prompt):
     return int(received)
   except:
     fail("Invalid number")
+
+def empty_line():
+  print(ERASE_LINE)
 
 if __name__ == '__main__':
   main()
