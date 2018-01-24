@@ -1,15 +1,37 @@
-def print_simplex_problem(problem):
-  objective = [
-    "%i%s" % (coefficient, nth_x(i + 1)) for i, coefficient in enumerate(problem[1])
-  ]
+from functools import reduce
 
-  print("Max. Z = %s" % " + ".join(objective))
-  return 1
+def print_simplex_problem(problem):
+  def equation(coefficients):
+    with_var = [
+      "%i%s" % (coefficient, nth_x(i + 1))
+        for i, coefficient in enumerate(coefficients)
+    ]
+
+    return reduce(lambda a, b: 
+      a + " - " + b[1:] if b[0] == "-"
+      else a + " + " + b
+    , with_var)
+
+  n_vars = problem[0]
+  objective = problem[1]
+  restrictions = problem[2]
+
+  print("Max. Z = %s" % equation(objective))
+
+  for restriction in restrictions:
+    op = restriction[-1]
+    rhs = str(restriction[-2])
+    print(equation(restriction[:-2]) + " " + op + " " + rhs)
+
+  variables = [nth_x(i) for i in range(1, n_vars + 1)]
+
+  print(", ".join(variables) + " >= 0")
 
 def print_simplex_table(n, table):
-  formated_table = list(map(lambda row:
-    list(map(lambda x: "{0:.2f}".format(round(x, 2)), row))
-  , table))
+  formated_table = [
+    [ "{0:.2f}".format(x) for x in row
+    ] for row in table
+  ]
 
   slack_count = len(table[0]) - n - 1
 

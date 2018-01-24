@@ -24,12 +24,12 @@ examples = [
 
 for problem in examples:
   printer.print_simplex_problem(problem)
+  print()
+
   gen = maximization(*problem)
 
   for table in gen:
     printer.print_simplex_table(3, table)
     print()
 
-  print()
-  print()
   print()
