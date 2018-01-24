@@ -7,7 +7,7 @@ def print_simplex_problem(problem):
         for i, coefficient in enumerate(coefficients)
     ]
 
-    return reduce(lambda a, b: 
+    return reduce(lambda a, b:
       a + " - " + b[1:] if b[0] == "-"
       else a + " + " + b
     , with_var)
