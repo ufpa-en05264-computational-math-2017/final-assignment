@@ -43,12 +43,13 @@ def seidel_handler():
 def simplex_handler():
   pass
 
+END_COLOR = '\033[0m'
 def red(str):
-  return "\033[91m" + str
+  return "\033[91m" + str + END_COLOR
 def green(str):
-  return "\033[92m" + str
+  return "\033[92m" + str + END_COLOR
 def blue(str):
-  return "\033[94m" + str
+  return "\033[94m" + str + END_COLOR
 
 def fail(str):
   sys.stderr.write(red(str) + "\n")
