@@ -1,4 +1,5 @@
 from functools import reduce
+from utils import nth_x, nth_slack_x
 
 def print_simplex_problem(problem):
   def equation(coefficients):
@@ -44,13 +45,3 @@ def print_simplex_table(n, table):
   fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
   table = [fmt.format(*row) for row in s]
   print('\n'.join(table))
-
-# Utils
-
-SUB = ["₀", "₁", "₂", "₃", "₄", "₅", "₆", "₇", "₈", "₉"]
-
-def nth_x(i):
-  return "x%s" % SUB[i]
-
-def nth_slack_x(i):
-  return "xF%s" % SUB[i]
