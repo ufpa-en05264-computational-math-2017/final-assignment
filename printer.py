@@ -1,5 +1,7 @@
 from utils import nth_x, nth_slack_x, equation
 
+ERASE_LINE = '\x1b[2K'
+
 def print_simplex_problem(problem):
   n_vars = problem[0]
   objective = problem[1]
@@ -31,5 +33,5 @@ def print_simplex_table(n, table):
   s = [[str(e) for e in row] for row in [head] + formated_table]
   lens = [max(map(len, col)) for col in zip(*s)]
   fmt = '\t'.join('{{:{}}}'.format(x) for x in lens)
-  table = [fmt.format(*row) for row in s]
+  table = [ERASE_LINE + fmt.format(*row) for row in s]
   print('\n'.join(table))
