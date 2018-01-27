@@ -55,7 +55,7 @@ def restriction_to_equation(restriction):
   elif op == ">=":
     return -1, coefficients
   else:
-    print("Error: Invalid inequation")
+    print("Error: Invalid inequation sign", op)
     raise
 
 def transform_objective_fn_to_restriction(objective):
