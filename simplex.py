@@ -79,7 +79,11 @@ def find_pivot_row(pivot_col, table):
   def lowest(a, b): return b if b[1] > 0 and b[1] < a[1] else a
   restriction_rows = table[:-1]
 
-  i, _ = reduce(lowest, enumerate(map(row_to_value, restriction_rows)))
+  # This will be the start value.
+  # Since lowest won't check the current value of reduce for zeros
+  # It's a must so we won't get 0 pivots therefore x/0 later.
+  dummy = [None, float("inf")]
+  i, _ = reduce(lowest, [dummy] + list(enumerate(map(row_to_value, restriction_rows))))
   return i
 
 def generate_new_pivot_row(pivot_row, pivot_col, table):
