@@ -108,7 +108,7 @@ def simplex_handler():
   gen = maximization(*problem)
 
   for table in gen:
-    printer.print_simplex_table(3, table)
+    printer.print_simplex_table(n_vars, table)
     empty_line()
 
   empty_line()
