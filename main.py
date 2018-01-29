@@ -44,11 +44,13 @@ def jacobi_handler():
   print("Iniciando Jacobi")
   mainJS("J")
   print("Encerrando Jacobi")
+  main()
 
 def seidel_handler():
   print("Iniciando Seidel")
   mainJS("S")
   print("Encerrando Seidel")
+  main()
 
 def simplex_handler():
   # Assumes maximization. TODO: minimization
