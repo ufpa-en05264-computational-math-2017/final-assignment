@@ -55,20 +55,18 @@ def conv(r1,r2):
             break
     return result
 
-def escolha(A,b,x,dr,limite):
+def escolha(A,b,x,dr,limite,swi):
     validade = 1
-    swi = input("1: Jacobi\n2: Seidel\n:")
-    if (swi == "1"):
+    if (swi == "J"):
         print("Resposta:",Jacobi(A,b,x,dr,limite))
-    elif (swi == "2"):
+    elif (swi == "S"):
         print("Resposta:",Seidel(A,b,x,dr,limite))
     else:
         print("Opção inválida, retornando.")
         validade = 0
     return validade
 
-def menu(varQ,limite):
-    esco = 0
+def menu(varQ,limite,esco):
     if(varQ >= 1):
         matX = [x[:] for x in [[0.0]*(varQ+1)]*varQ]
         
@@ -99,22 +97,19 @@ def menu(varQ,limite):
 
             print("Sistema:",matX)
             
-            while(esco == 0):
-                print("Resolver Sistema utilizando qual metodo?")
-                esco = escolha(mat,vet,res,desV,limite)
+            
+            escolha(mat,vet,res,desV,limite,esco)
         else:
             print("Zero na diagonal principal.")
         
 
-def mainJS():
+def mainJS(prog):
     limite = 999
-    print("Iniciando Jacobi e Seidel")
     varQ = 1
     while(varQ >= 1):
         varQ = int(input("Quantas variáveis? (0 para encerrar):"))
-        menu(varQ,limite)
+        menu(varQ,limite,prog)
         
-    print("Encerrando Jacobi e Seidel")
         
 
 def testeSeidel():
@@ -132,5 +127,3 @@ def testeJacobi():
     b = 0.000000000001
     e = 999
     Jacobi(J,ac,o,b,e)
-
-mainJS()

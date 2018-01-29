@@ -3,6 +3,7 @@
 import sys
 from utils import nth_x, equation
 from simplex import maximization
+from SeiJac import mainJS
 import printer
 
 def main():
@@ -40,10 +41,14 @@ def gauss_handler():
   pass
 
 def jacobi_handler():
-  pass
+  print("Iniciando Jacobi")
+  mainJS("J")
+  print("Encerrando Jacobi")
 
 def seidel_handler():
-  pass
+  print("Iniciando Seidel")
+  mainJS("S")
+  print("Encerrando Seidel")
 
 def simplex_handler():
   # Assumes maximization. TODO: minimization
