@@ -17,6 +17,9 @@ def main():
 
   algorithm_id = ask_number("Algorithm: ")
 
+  if algorithm_id == 0:
+    return
+
   if algorithm_id < 1 or algorithm_id > len(algorithms):
     fail("Invalid option")
 
