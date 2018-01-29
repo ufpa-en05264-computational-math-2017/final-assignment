@@ -110,20 +110,3 @@ def mainJS(prog):
         varQ = int(input("How many variables? (0 to finalize):"))
         menu(varQ,limite,prog)
         
-        
-
-def testeSeidel():
-    S = [[7.0, 3.0, -1.0, 2.0], [3.0, 8.0, 1.0, -4.0], [-1.0, 1.0, 4.0, -1.0], [2.0, -4.0, -1.0, 6.0]]
-    a = [-1.0, 0.0, -3.0, 1.0]
-    y = [0.0]*len(S)
-    d = 0.00001
-    l = 999
-    Seidel(S,a,y,d,l)
-
-def testeJacobi():
-    J = [[-0.5, 1.0], [2.0, 5.0]]
-    ac= [1.0, -13.0]
-    o = [0.0]*len(J)
-    b = 0.000000000001
-    e = 999
-    Jacobi(J,ac,o,b,e)
