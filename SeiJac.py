@@ -14,7 +14,7 @@ def Seidel(A,b,x,dr,limite):
         converge = conv(xTmp,x)
         if (crit > limite):
             continua = 0
-            print("Sem solução satisfatória depois de",crit,"iterações")
+            print("No definitive solution after",crit,"iterations.")
     return x
 
 def Jacobi(A,b,x,dr,limite):
@@ -34,14 +34,14 @@ def Jacobi(A,b,x,dr,limite):
         crit += 1
         if (crit > limite):
             continua = 0
-            print("Sem solução satisfatória depois de",crit,"iterações")
+            print("No definitive solution after",crit,"iterations.")
     return x
 
 def testa(r1,r2,dr):
     result = 0
-    print("\nNo vetor resposta\n",r2)
+    print("\nFor answer array\n",r2)
     for i in range(0,len(r1)):
-        print("Desvio x",(i+1),"=",abs(r1[i] - r2[i]))
+        print("Deviation x",(i+1),"=",abs(r1[i] - r2[i]))
         if (abs(r1[i] - r2[i]) >= dr ):
             result = 1
     return result
@@ -51,18 +51,18 @@ def conv(r1,r2):
     for i in range(0,len(r1)):
         if (abs(r1[i] - r2[i]) > 9999):
             result = 0
-            print("Desvio muito grande, sistema não converge.")
+            print("Deviation too big, system does not converge.")
             break
     return result
 
 def escolha(A,b,x,dr,limite,swi):
     validade = 1
     if (swi == "J"):
-        print("Resposta:",Jacobi(A,b,x,dr,limite))
+        print("Answer:",Jacobi(A,b,x,dr,limite))
     elif (swi == "S"):
-        print("Resposta:",Seidel(A,b,x,dr,limite))
+        print("Answer:",Seidel(A,b,x,dr,limite))
     else:
-        print("Opção inválida, retornando.")
+        print("Invalid option, returning. (this message should never appear!)")
         validade = 0
     return validade
 
@@ -72,8 +72,8 @@ def menu(varQ,limite,esco):
         
         for i in range(varQ):
             for j in range(varQ+1):
-                print("Sistema:",matX)
-                print("Linha:",i+1,"Coluna",j+1,":")
+                print("System:",matX)
+                print("Line:",i+1,"Column",j+1,":")
                 matX[i][j] = float(input())
         
         res = [0.0]*varQ
@@ -93,21 +93,21 @@ def menu(varQ,limite,esco):
 
 
         if (zeroOnDiag == 0):
-            desV = float(input("dr máximo:"))
+            desV = float(input("Max dr:"))
 
-            print("Sistema:",matX)
+            print("System:",matX)
             
             
             escolha(mat,vet,res,desV,limite,esco)
         else:
-            print("Zero na diagonal principal.")
+            print("Zero at main diagonal. Will not divide by 0")
         
 
 def mainJS(prog):
     limite = 999
     varQ = 1
     while(varQ >= 1):
-        varQ = int(input("Quantas variáveis? (0 para encerrar):"))
+        varQ = int(input("How many variables? (0 to finalize):"))
         menu(varQ,limite,prog)
         
         

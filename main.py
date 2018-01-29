@@ -41,15 +41,15 @@ def gauss_handler():
   pass
 
 def jacobi_handler():
-  print("Iniciando Jacobi")
+  print("Starting Jacobi")
   mainJS("J")
-  print("Encerrando Jacobi")
+  print("Ending Jacobi")
   main()
 
 def seidel_handler():
-  print("Iniciando Seidel")
+  print("Starting Seidel")
   mainJS("S")
-  print("Encerrando Seidel")
+  print("Ending Seidel")
   main()
 
 def simplex_handler():
