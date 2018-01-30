@@ -6,7 +6,7 @@ def nth_x(i):
   return "x%s" % SUB[i]
 
 def nth_slack_x(i):
-  return "xF%s" % SUB[i]
+  return "s%s" % SUB[i]
 
 def equation(coefficients):
   with_var = [
@@ -19,3 +19,12 @@ def equation(coefficients):
     else a + " + " + b
   , with_var)
 
+def transpose(matrix):
+  return map(list, zip(*matrix))
+
+def invert_sign(sign):
+  if sign == "<=":
+    return ">="
+  elif sign == ">=":
+    return "<="
+  return sign
