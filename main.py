@@ -2,8 +2,8 @@
 
 import sys
 from utils import nth_x, equation
-from simplex import maximization
 from SeiJac import mainJS
+from simplex import solve_simplex
 import printer
 
 def main():
@@ -15,7 +15,7 @@ def main():
     )
   )
 
-  algorithm_id = ask_number("Algorithm: ")
+  algorithm_id = ask_int("Algorithm: ")
 
   if algorithm_id == 0:
     return
@@ -56,24 +56,32 @@ def seidel_handler():
   main()
 
 def simplex_handler():
-  # Assumes maximization. TODO: minimization
+  prompt = "Kind (Max, Min): "
+  kind = input(prompt)
+
+  if kind not in ["Max", "Min"]:
+    print(red("Invalid kind %s" % kind))
+    exit(1)
+
+  update_line(prompt + blue(kind))
+
   prompt = "Number of variables: "
-  n_vars = ask_number(prompt)
+  n_vars = ask_int(prompt)
   update_line(prompt + blue(str(n_vars)))
 
   prompt = "Number of restrictions: "
-  n_restrictions = ask_number(prompt)
+  n_restrictions = ask_int(prompt)
   update_line(prompt + blue(str(n_restrictions)))
 
   empty_line()
 
   objective = []
 
-  prompt = "Max. Z = "
+  prompt = kind + ". Z = "
   print(prompt)
 
   for i in range(1, n_vars + 1):
-    x = ask_number(nth_x(i) + " = ")
+    x = ask_float(nth_x(i) + " = ")
     objective.append(x)
     erase_line()
     update_line(prompt + equation(objective))
@@ -87,7 +95,7 @@ def simplex_handler():
     # Ask coefficients
 
     for j in range(1, n_vars + 1):
-      x = ask_number(nth_x(j) + " = ")
+      x = ask_float(nth_x(j) + " = ")
       current_restriction.append(x)
       erase_line()
       update_line(equation(current_restriction))
@@ -104,24 +112,26 @@ def simplex_handler():
 
     # Ask `b`
 
-    b = ask_number("b = ")
+    b = ask_float("b = ")
 
     erase_line()
     update_line(equation(current_restriction) + " " + op + " " + str(b))
 
     restrictions.append(current_restriction + [b, op])
 
-  problem = [n_vars, objective, restrictions]
+  problem = [kind, objective, restrictions]
 
   empty_line()
 
-  gen = maximization(*problem)
+  gen = solve_simplex(*problem)
 
-  for table in gen:
+  for table in gen["iterations"]:
     printer.print_simplex_table(n_vars, table)
     empty_line()
 
   empty_line()
+
+  print(gen["variables"])
 
 END_COLOR = '\033[0m'
 CURSOR_UP_ONE = '\x1b[1A'
@@ -143,11 +153,19 @@ def erase_line():
 def update_line(str):
   print(CURSOR_UP_ONE + ERASE_LINE + str)
 
-def ask_number(prompt):
+def ask_int(prompt):
   received = input(prompt)
 
   try:
     return int(received)
+  except:
+    fail("Invalid number")
+
+def ask_float(prompt):
+  received = input(prompt)
+
+  try:
+    return float(received)
   except:
     fail("Invalid number")
 
