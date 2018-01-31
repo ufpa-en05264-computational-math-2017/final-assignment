@@ -55,15 +55,6 @@ def seidel_handler():
   main()
 
 def simplex_handler():
-  prompt = "Kind (Max, Min): "
-  kind = input(prompt)
-
-  if kind not in ["Max", "Min"]:
-    print(red("Invalid kind %s" % kind))
-    exit(1)
-
-  update_line(prompt + blue(kind))
-
   prompt = "Number of variables: "
   n_vars = ask_int(prompt)
   update_line(prompt + blue(str(n_vars)))
@@ -76,7 +67,16 @@ def simplex_handler():
 
   objective = []
 
-  prompt = kind + ". Z = "
+  prompt = "Kind (Max, Min): "
+  kind = input(prompt)
+
+  if kind not in ["Max", "Min"]:
+    print(red("Invalid kind %s" % kind))
+    exit(1)
+
+  update_line(prompt + blue(kind))
+
+  prompt = blue(kind) + ". Z = "
   print(prompt)
 
   for i in range(1, n_vars + 1):
