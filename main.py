@@ -74,8 +74,7 @@ def simplex_handler():
     print(red("Invalid kind %s" % kind))
     exit(1)
 
-  update_line(prompt + blue(kind))
-
+  erase_line()
   prompt = blue(kind) + ". Z = "
   print(prompt)
 
