@@ -3,6 +3,8 @@ from stdio import *
 from utils import nth_x, equation
 from SeiJac import mainJS
 from simplex import solve_simplex
+from gauss import gauss
+from lu import lu
 import printer
 
 def main():
@@ -37,10 +39,10 @@ def main():
   options[algorithm_id]()
 
 def lu_handler():
-  pass
+  lu()
 
 def gauss_handler():
-  pass
+  gauss()
 
 def jacobi_handler():
   print("Starting Jacobi")
